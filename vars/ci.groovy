@@ -12,6 +12,7 @@ def call() {
           script {
             withAWSParameterStore(naming: 'absolute', path: 'sonarqube.user', recursive: false, regionName: 'us-east-1') {
               sh 'env'
+              sh 'exit 1'
             }
             common.compile()
           }
