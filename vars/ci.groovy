@@ -11,7 +11,7 @@ def call() {
         steps {
           script {
             withAWSParameterStore(credentialsId: 'PARAM', naming: 'absolute', path: 'sonarqube.user', recursive: false, regionName: 'us-east-1') {
-             sh 'echo ${SONARQUBE_USER}'
+             sh 'env'
               sh 'exit 1'
             }
             common.compile()
