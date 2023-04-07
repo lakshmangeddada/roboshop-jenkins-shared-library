@@ -5,6 +5,15 @@ def call() {
   node('workstation') {
 
     try {
+
+      stage('Check Out Code') {
+        sh 'ls -l'
+        cleanWs()
+        sh 'ls -1'
+        git branch: 'main', url: 'https://github.com/raghudevopsb71/cart'
+        sh 'ls -l'
+      }
+
       stage('Compile/Build') {
         sh 'env'
         common.compile()
