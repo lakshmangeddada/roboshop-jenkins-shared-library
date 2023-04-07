@@ -14,9 +14,12 @@ def call() {
         sh 'ls -l'
       }
 
-      stage('Compile/Build') {
-        sh 'env'
-        common.compile()
+      sh 'env'
+
+      if (env.BRANCH_NAME != "main") {
+        stage('Compile/Build') {
+          common.compile()
+        }
       }
 
       stage('Test Cases') {
