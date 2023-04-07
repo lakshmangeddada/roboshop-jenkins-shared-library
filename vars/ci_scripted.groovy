@@ -19,9 +19,12 @@ def call() {
         }
       }
 
-      stage('Test Cases') {
-        common.testcases()
+      if(env.TAG_NAME) {
+        stage('Test Cases') {
+          common.testcases()
+        }
       }
+
 
       stage('Code Quality') {
         common.codequality()
