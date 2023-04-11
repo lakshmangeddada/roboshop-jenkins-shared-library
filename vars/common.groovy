@@ -31,3 +31,11 @@ def prepareArtifacts() {
   }
 
 }
+
+def artifactUpload() {
+  sh 'echo ${TAG_NAME} >VERSION'
+  if (app_lang == "nodejs" || app_lang == "angular") {
+    sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.11.210:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+  }
+
+}
