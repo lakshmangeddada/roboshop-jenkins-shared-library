@@ -40,6 +40,16 @@ def call() {
         }
       }
 
+      if(env.GTAG != "true" && env.BRANCH_NAME != "main") {
+        stage('Package') {
+          common.testcases()
+        }
+        stage('Artifact Upload') {
+          common.testcases()
+        }
+      }
+
+
     } catch (e) {
       mail body: "<h1>${component} - Pipeline Failed \n ${BUILD_URL}</h1>", from: 'raghudevopsb71@gmail.com', subject: "${component} - Pipeline Failed", to: 'raghudevopsb71@gmail.com',  mimeType: 'text/html'
     }
