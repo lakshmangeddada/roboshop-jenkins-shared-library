@@ -40,7 +40,7 @@ def call() {
         }
       }
 
-      if(env.GTAG != "true" && env.BRANCH_NAME != "main") {
+      if(env.GTAG == "true") {
         stage('Package') {
           common.testcases()
         }
