@@ -14,7 +14,7 @@ def call() {
 
       stage('Check Out Code') {
         cleanWs()
-        git branch: 'main', url: 'https://github.com/raghudevopsb71/cart'
+        git branch: 'main', url: 'https://github.com/raghudevopsb71/${component}'
       }
 
       sh 'env'
