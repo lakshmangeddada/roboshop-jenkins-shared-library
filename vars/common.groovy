@@ -36,10 +36,11 @@ def prepareArtifacts() {
 
 def artifactUpload() {
   MASKED_SECRET = 'I_SHOULD_BE_MASKED'
+  MASKED_SECRET1 = 'I_SHOULD_BE_MASKED'
   wrap([$class: 'MaskPasswordsBuildWrapper',
-        varPasswordPairs: [[password: MASKED_SECRET]]]) {
+        varPasswordPairs: [[password: MASKED_SECRET], [password: MASKED_SECRET1]]]) {
     echo 'Retrieve Secret: ' +  MASKED_SECRET
-    echo MASKED_SECRET
+    echo 'Retrieve Secret1: ' +  MASKED_SECRET1
   }
   NEXUS_USER = sh ( script: 'aws ssm get-parameter --name prod.nexus.user --with-decryption | jq .Parameter.Value | xargs', returnStdout: true ).trim()
   sh 'echo ${TAG_NAME} >VERSION'
