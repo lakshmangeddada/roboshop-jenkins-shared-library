@@ -31,7 +31,7 @@ def prepareArtifacts() {
   } else {
     sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile'
   }
-  
+
 }
 
 def artifactUpload() {
