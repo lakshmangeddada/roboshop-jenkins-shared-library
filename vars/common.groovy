@@ -35,9 +35,15 @@ def prepareArtifacts() {
 }
 
 def artifactUpload() {
+  MASKED_SECRET = 'I_SHOULD_BE_MASKED'
+  wrap([$class: 'MaskPasswordsBuildWrapper',
+        varPasswordPairs: [[password: MASKED_SECRET]]]) {
+    echo 'Retrieve Secret: ' +  MASKED_SECRET
+    echo MASKED_SECRET
+  NEXUS_USER = sh ( script: 'aws ssm get-parameter --name prod.nexus.user --with-decryption | jq .Parameter.Value | xargs', returnStdout: true ).trim()
   sh 'echo ${TAG_NAME} >VERSION'
   //if (app_lang == "nodejs" || app_lang == "angular") {
-    sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.11.210:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+    sh 'curl -v -u ${NEXUS_USER}:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.11.210:8081/repository/${component}/${component}-${TAG_NAME}.zip'
   //}
 
 }
