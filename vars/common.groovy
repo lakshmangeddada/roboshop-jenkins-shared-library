@@ -35,8 +35,8 @@ def prepareArtifacts() {
 }
 
 def artifactUpload() {
-  NEXUS_USER = sh ( script: 'aws ssm get-parameter --name prod.nexus.user --with-decryption | jq .Parameter.Value | xargs', returnStdout: true ).trim()
-  NEXUS_PASS = sh ( script: 'aws ssm get-parameter --name prod.nexus.pass --with-decryption | jq .Parameter.Value | xargs', returnStdout: true ).trim()
+  env.NEXUS_USER = sh ( script: 'aws ssm get-parameter --name prod.nexus.user --with-decryption | jq .Parameter.Value | xargs', returnStdout: true ).trim()
+  env.NEXUS_PASS = sh ( script: 'aws ssm get-parameter --name prod.nexus.pass --with-decryption | jq .Parameter.Value | xargs', returnStdout: true ).trim()
   wrap([$class: 'MaskPasswordsBuildWrapper',
         varPasswordPairs: [[password: NEXUS_USER], [password: NEXUS_PASS]]]) {
     sh 'echo ${TAG_NAME} >VERSION'
