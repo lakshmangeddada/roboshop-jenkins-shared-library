@@ -36,7 +36,7 @@ def prepareArtifacts() {
 
 def artifactUpload() {
   MASKED_SECRET = 'I_SHOULD_BE_MASKED'
-  MASKED_SECRET1 = 'I_SHOULD_BE_MASKED'
+  MASKED_SECRET1 = 'GOOGLE.COM'
   wrap([$class: 'MaskPasswordsBuildWrapper',
         varPasswordPairs: [[password: MASKED_SECRET], [password: MASKED_SECRET1]]]) {
     echo 'Retrieve Secret: ' +  MASKED_SECRET
