@@ -40,6 +40,7 @@ def artifactUpload() {
         varPasswordPairs: [[password: MASKED_SECRET]]]) {
     echo 'Retrieve Secret: ' +  MASKED_SECRET
     echo MASKED_SECRET
+  }
   NEXUS_USER = sh ( script: 'aws ssm get-parameter --name prod.nexus.user --with-decryption | jq .Parameter.Value | xargs', returnStdout: true ).trim()
   sh 'echo ${TAG_NAME} >VERSION'
   //if (app_lang == "nodejs" || app_lang == "angular") {
