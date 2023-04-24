@@ -17,8 +17,6 @@ def call() {
         git branch: 'main', url: "https://github.com/raghudevopsb71/${component}"
       }
 
-      sh 'env'
-
       if (env.BRANCH_NAME != "main") {
         stage('Compile/Build') {
           common.compile()
