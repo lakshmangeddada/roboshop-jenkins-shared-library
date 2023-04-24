@@ -31,7 +31,7 @@ def prepareArtifacts() {
 //  } else {
 //    sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile'
 //  }
-  docker build -t 739561048503.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} .
+  sh 'docker build -t 739561048503.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} .'
 }
 
 def artifactUpload() {
